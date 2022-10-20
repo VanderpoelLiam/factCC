@@ -1,0 +1,6 @@
+bacc = 0.25
+f1 = 0.20000000000000004
+factCC metric = 0.19999999999999996
+loss = 5.058915138244629
+mapping = {0 = CORRECT, 1 = INCORRECT}
+preds = [1 1 1 1 0]

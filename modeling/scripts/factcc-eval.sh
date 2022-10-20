@@ -3,7 +3,7 @@
 
 # UPDATE PATHS BEFORE RUNNING SCRIPT
 export CODE_PATH=/home/liam/factCC/modeling
-export DATA_PATH=/home/liam/factCC/data
+export DATA_PATH=/home/liam/factCC/data/bart_0.0000E+00_0.0000E+00
 export CKPT_PATH=/home/liam/factCC/factcc-checkpoint
 
 export TASK_NAME=factcc_annotated

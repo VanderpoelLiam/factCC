@@ -263,7 +263,7 @@ def evaluate(args, model, tokenizer, prefix=""):
         result["factCC metric"] = 1 - np.mean(preds)
         results.update(result)
 
-        output_eval_file = os.path.join(eval_output_dir, "eval_results.txt")
+        output_eval_file = os.path.join(args.data_dir, "eval_results.txt")
         with open(output_eval_file, "w") as writer:
             logger.info("***** Eval results {} *****".format(prefix))
             for key in sorted(results.keys()):
