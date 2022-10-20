@@ -2,9 +2,9 @@
 # Evaluate FactCC model
 
 # UPDATE PATHS BEFORE RUNNING SCRIPT
-export CODE_PATH= # absolute path to modeling directory
-export DATA_PATH= # absolute path to data directory
-export CKPT_PATH= # absolute path to model checkpoint
+export CODE_PATH=/home/liam/factCC/modeling
+export DATA_PATH=/home/liam/factCC/data
+export CKPT_PATH=/home/liam/factCC/factcc-checkpoint
 
 export TASK_NAME=factcc_annotated
 export MODEL_NAME=bert-base-uncased

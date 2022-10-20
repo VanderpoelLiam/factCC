@@ -118,7 +118,7 @@ def train(args, train_dataset, model, tokenizer):
     logger.info("  Num examples = %d", len(train_dataset))
     logger.info("  Num Epochs = %d", args.num_train_epochs)
     logger.info("  Instantaneous batch size per GPU = %d", args.per_gpu_train_batch_size)
-    logger.info("  Total train batch size (w. parallel, distributed & accumulation) = %d", 
+    logger.info("  Total train batch size (w. parallel, distributed & accumulation) = %d",
                 args.train_batch_size * args.gradient_accumulation_steps * (torch.distributed.get_world_size() if args.local_rank != -1 else 1))
     logger.info("  Gradient Accumulation steps = %d", args.gradient_accumulation_steps)
     logger.info("  Total optimization steps = %d", t_total)
@@ -258,6 +258,9 @@ def evaluate(args, model, tokenizer, prefix=""):
         result = compute_metrics(args.task_name, preds, out_label_ids)
         eval_loss = eval_loss / nb_eval_steps
         result["loss"] = eval_loss
+        result["mapping"] = "{0 = CORRECT, 1 = INCORRECT}"
+        result["preds"] = preds
+        result["factCC metric"] = 1 - np.mean(preds)
         results.update(result)
 
         output_eval_file = os.path.join(eval_output_dir, "eval_results.txt")
@@ -298,9 +301,9 @@ def load_and_cache_examples(args, task, tokenizer, evaluate=False):
             pad_on_left=bool(args.model_type in ['xlnet']),                 # pad on the left for xlnet
             pad_token=tokenizer.convert_tokens_to_ids([tokenizer.pad_token])[0],
             pad_token_segment_id=4 if args.model_type in ['xlnet'] else 0)
-        if args.local_rank in [-1, 0]:
-            logger.info("Saving features into cached file %s", cached_features_file)
-            torch.save(features, cached_features_file)
+        # if args.local_rank in [-1, 0]:
+        #     logger.info("Saving features into cached file %s", cached_features_file)
+        #     torch.save(features, cached_features_file)
 
     if args.local_rank == 0:
         torch.distributed.barrier()  # Make sure only the first process in distributed training process the dataset, and the others will use the cache
